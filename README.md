@@ -1,6 +1,7 @@
-# Tube Tracker Back-End
+# Awesome Project Build with TypeORM
+        
+Steps to run this project:
 
-### How to install and run
-- Run `yarn install` to install all dependencies
-- Run `yarn run dev` to start program
-- Navigate to `localhost:3000` in your browser
+1. Run `npm i` command
+2. Setup database settings inside `ormconfig.json` file
+3. Run `npm start` command
