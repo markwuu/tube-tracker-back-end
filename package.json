@@ -1,35 +1,28 @@
 {
-  "name": "tube-tracker-back-end",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "build": "tsc",
-    "start": "nodemon",
-    "prod": "npm run build && npm run start",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/markwuu/tube-tracker-back-end.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/markwuu/tube-tracker-back-end/issues"
-  },
-  "homepage": "https://github.com/markwuu/tube-tracker-back-end#readme",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "pg": "^7.4.3",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^4.38.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.16.0",
-    "nodemon": "^1.18.3",
-    "sequelize-cli": "^4.0.0",
-    "ts-node": "^7.0.0",
-    "typescript": "^2.9.2"
-  }
+   "name": "TubeTracker",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/body-parser": "^1.17.0",
+      "@types/express": "^4.16.0",
+      "@types/node": "^10.5.4",
+      "@types/passport": "^0.4.6",
+      "nodemon": "^1.18.3",
+      "ts-node": "7.0.0",
+      "typescript": "3.0.1"
+   },
+   "dependencies": {
+      "body-parser": "^1.18.1",
+      "express": "^4.15.4",
+      "jsonwebtoken": "^8.3.0",
+      "passport": "^0.4.0",
+      "passport-jwt": "^4.0.0",
+      "passport-local": "^1.0.0",
+      "pg": "^7.3.0",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.7"
+   },
+   "scripts": {
+      "start": "ts-node src/index.ts"
+   }
 }
