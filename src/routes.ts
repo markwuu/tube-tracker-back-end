@@ -5,24 +5,12 @@ export const Routes = [
     method: 'post',
     route: '/signup',
     controller: UserController,
-    action: 'save',
+    action: 'signup',
   },
   {
-    method: 'get',
-    route: '/users',
+    method: 'post',
+    route: '/login',
     controller: UserController,
-    action: 'all',
-  },
-  {
-    method: 'get',
-    route: '/users/:id',
-    controller: UserController,
-    action: 'one',
-  },
-  {
-    method: 'delete',
-    route: '/users',
-    controller: UserController,
-    action: 'remove',
+    action: 'login',
   },
 ]

@@ -1,5 +1,6 @@
 {
-   "name": "TubeTracker",
+   "name": "tube-tracker-back-end",
+   "license": "ISC",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {

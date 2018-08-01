@@ -6,25 +6,37 @@ import * as bcrypt from 'bcrypt'
 export class UserController {
   private userRepository = getRepository(User)
 
-  async all(request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.find()
+  async signup(request: Request, response: Response, next: NextFunction) {
+    try {
+      const hash = bcrypt.hashSync(request.body.password, 10)
+      const user = await this.userRepository.create({
+        email: request.body.email,
+        password: hash,
+      })
+      await this.userRepository.save(user)
+      return { id: user.id }
+    } catch (e) {
+      console.log(e.message)
+      return { id: 0 }
+    }
   }
 
-  async one(request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.findOne(request.params.id)
-  }
-
-  async save(request: Request, response: Response, next: NextFunction) {
-    const hash = bcrypt.hashSync(request.body.password, 10)
-    const user = await this.userRepository.create({
-      email: request.body.email,
-      password: hash,
-    })
-    await this.userRepository.save(user)
-    return { id: user.id }
-  }
-
-  async remove(request: Request, response: Response, next: NextFunction) {
-    await this.userRepository.remove(request.params.id)
+  async login(request: Request, response: Response, next: NextFunction) {
+    try {
+      const user = await this.userRepository.findOne({
+        email: request.body.email,
+      })
+      const isEmailMatching = request.body.email === user.email
+      const isPasswordMatching = bcrypt.compareSync(
+        request.body.password,
+        user.password,
+      )
+      return isEmailMatching && isPasswordMatching
+        ? { isUser: true }
+        : { isUser: false }
+    } catch (e) {
+      console.log(e.message)
+      return { isUser: false }
+    }
   }
 }
