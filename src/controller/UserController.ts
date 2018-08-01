@@ -16,10 +16,12 @@ export class UserController {
 
   async save(request: Request, response: Response, next: NextFunction) {
     const hash = bcrypt.hashSync(request.body.password, 10)
-    return this.userRepository.save({
+    const user = await this.userRepository.create({
       email: request.body.email,
       password: hash,
     })
+    await this.userRepository.save(user)
+    return { id: user.id }
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
