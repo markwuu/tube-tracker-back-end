@@ -5,7 +5,7 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-# 2 space indentation
-[*.{ts,js,json}]
+# 4 space indentation
+[*.php]
 indent_style = space
 indent_size = 4

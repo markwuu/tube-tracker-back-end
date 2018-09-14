@@ -6,9 +6,12 @@
 
 # Setup
 
+1. In the project directory, run `composer install`
 1. In the project directory, run `valet link tt`
 1. Run `createdb tube_tracker_dev`
 1. In the project directory, run `cp .env.example .env`
 1. Open `.env` and replace `root` with your computer username
+1. In the project directory, run `php artisan migrate`
+1. [Optional] In the project directory, run `php artisan db:seed`
 
 The app will be hosted at `tt.test`.
