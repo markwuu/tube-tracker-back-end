@@ -10,3 +10,5 @@
 1. Run `createdb tube_tracker_dev`
 1. In the project directory, run `cp .env.example .env`
 1. Open `.env` and replace `root` with your computer username
+
+The app will be hosted at `tt.test`.
