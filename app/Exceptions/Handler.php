@@ -45,6 +45,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception->getStatusCode() === 404) {
+            return response()->json(['error' => 'API endpoint not found'], 404);
+        }
+
         return parent::render($request, $exception);
     }
 }
