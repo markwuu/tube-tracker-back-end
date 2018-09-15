@@ -65,6 +65,7 @@ $app->singleton(
 
 $app->routeMiddleware([
     'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
+    'tvdb' => App\Http\Middleware\TvDbMiddleware::class,
 ]);
 
 /*

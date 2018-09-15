@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
