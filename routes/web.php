@@ -11,8 +11,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-  return [
-    'Hello' => 'Friend',
-  ];
+$router->post('/login', ['uses' => 'AuthController@authenticate']);
+
+$router->group(['middleware' => 'jwt.auth'], function() use($router) {
+    // Authenticated routes go here.
 });
