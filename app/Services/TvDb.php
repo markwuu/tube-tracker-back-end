@@ -10,8 +10,7 @@ class TvDb {
     private static $EXPIRATION_DURATION = 60 * 60 * 23; // 23 hours
 
     private $client;
-    // TODO: MAKE PRIVATE
-    public $token;
+    private $token;
 
     public function __construct() {
         $this->client = new Client();
@@ -25,6 +24,10 @@ class TvDb {
         return $this->get('/search/series', [
             'name' => $query,
         ]);
+    }
+
+    public function find(int $id) {
+        return $this->get("/series/${id}/episodes");
     }
 
     private function setRefreshToken() {

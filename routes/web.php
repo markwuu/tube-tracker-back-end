@@ -19,5 +19,6 @@ $router->group(['middleware' => 'jwt.auth'], function() use($router) {
 
     $router->group(['middleware' => 'tvdb'], function() use($router) {
         $router->get('/shows', ['uses' => 'ShowController@index']);
+        $router->get('/shows/{id}', ['uses' => 'ShowController@show']);
     });
 });

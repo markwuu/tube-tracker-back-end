@@ -14,5 +14,9 @@ class ShowController extends Controller {
 
         return $request->tvDb->search($request->input('query'));
     }
+
+    public function show(int $id, Request $request) {
+        return $request->tvDb->find($id);
+    }
 }
 
