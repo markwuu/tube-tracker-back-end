@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'iss' => 'lumen-jwt', // issuer of token
             'sub' => $this->id,
             'iat' => time(), // time JWT was issued
-            'exp' => time() + 60*60, // expiration time
+            'exp' => strtotime('+1 year'), // expiration time
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));
