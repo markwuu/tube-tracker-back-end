@@ -11,8 +11,9 @@
 |
 */
 
+$router->post('/signup', ['uses' => 'UserController@create']);
 $router->post('/login', ['uses' => 'AuthController@authenticate']);
 
 $router->group(['middleware' => 'jwt.auth'], function() use($router) {
-    // Authenticated routes go here.
+    $router->get('/me', ['uses' => 'UserController@me']);
 });
