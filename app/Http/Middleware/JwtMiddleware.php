@@ -10,14 +10,18 @@ use Firebase\JWT\JWT;
 
 class JwtMiddleware {
     public function handle($request, Closure $next, $guard = null) {
-        $token = $request->get('token');
+        $authorization = $request->header('Authorization', '');
+        $matches = [];
+        $is_valid_token = preg_match('/^Bearer ([^\s]+)$/', $authorization, $matches);
 
-        if(!$token) {
+        if (!$is_valid_token) {
             // Unauthorized response if token not there
             return response()->json([
-                'error' => 'Token not provided.'
+                'error' => $authorization ? 'Invalid token' : 'Token not provided'
             ], 401);
         }
+
+        $token = $matches[1];
 
         try {
             $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);

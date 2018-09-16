@@ -25,5 +25,11 @@ class AuthController extends BaseController
              : response()->json(['error' => 'Invalid email or password'], 401);
     }
 
+
+    public function refreshToken(Request $request) {
+        return response()->json([
+            'token' => $request->auth->getJwt(),
+        ], 200);
+    }
 }
 

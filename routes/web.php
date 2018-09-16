@@ -16,6 +16,7 @@ $router->post('/login', ['uses' => 'AuthController@authenticate']);
 
 $router->group(['middleware' => 'jwt.auth'], function() use($router) {
     $router->get('/me', ['uses' => 'UserController@me']);
+    $router->post('/refresh_token', ['uses' => 'AuthController@refreshToken']);
 
     $router->group(['middleware' => 'tvdb'], function() use($router) {
         $router->get('/shows', ['uses' => 'ShowController@index']);
