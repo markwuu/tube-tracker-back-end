@@ -8,6 +8,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Auth\Authorizable;
 
@@ -44,6 +45,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));
+    }
+
+    public function getShows() {
+        return DB::table('users_shows')->where(['user_id' => $this->id])
+                                       ->pluck('show_id')
+                                       ->toArray();
+
+    }
+
+    public function addShow(int $showId) {
+        return DB::table('users_shows')->insertGetId([
+            'user_id' => $this->id,
+            'show_id' => $showId,
+        ]);
     }
 
     public static function create(string $email, string $password) {

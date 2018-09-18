@@ -10,6 +10,8 @@ class TvDbRefreshToken extends Model
     protected $primaryKey = null;
     protected $table = 'refresh_token';
 
+    private static $EXPIRATION_DURATION = 60 * 60 * 23; // 23 hours
+
     protected $fillable = [
         'token',
     ];
@@ -29,6 +31,10 @@ class TvDbRefreshToken extends Model
         if ($currentToken) $currentToken->delete();
 
         return static::create(['token' => $refreshToken]);
+    }
+
+    public function isExpired() {
+        return $this->updated_at->getTimestamp() >= time() + self::$EXPIRATION_DURATION;
     }
 
 }

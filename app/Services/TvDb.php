@@ -4,10 +4,10 @@ namespace App\Services;
 
 use App\Models\TvDbRefreshToken;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class TvDb {
     private static $API_BASE_URL = 'https://api.thetvdb.com';
-    private static $EXPIRATION_DURATION = 60 * 60 * 23; // 23 hours
 
     private $client;
     private $token;
@@ -27,14 +27,26 @@ class TvDb {
     }
 
     public function find(int $id) {
+        return $this->get("/series/${id}");
+    }
+
+    public function findEpisodes(int $id) {
         return $this->get("/series/${id}/episodes");
+    }
+
+    public function isValidShow(int $id) {
+        try {
+            $this->find($id);
+            return true;
+        } catch (RequestException $e) {
+            return false;
+        }
     }
 
     private function setRefreshToken() {
         $refreshToken = TvDbRefreshToken::get();
-        $exp = time() + self::$EXPIRATION_DURATION;
 
-        if (!$refreshToken || $refreshToken->updated_at->getTimestamp() >= $exp) {
+        if (!$refreshToken || $refreshToken->isExpired()) {
             $token = $this->login()['token'];
             $refreshToken = TvDbRefreshToken::set($token);
         }
