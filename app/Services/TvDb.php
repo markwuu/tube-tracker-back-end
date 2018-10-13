@@ -65,7 +65,11 @@ class TvDb {
 
     private function login() {
         return $this->call('POST', '/login', [
-            'json' => ['apiKey' => env('TVDB_KEY')],
+            'json' => [
+                'apikey' => env('TVDB_KEY'),
+                'userkey' => env('TVDB_USERKEY'),
+                'username' => env('TVDB_USERNAME'),
+            ],
         ]);
     }
 
